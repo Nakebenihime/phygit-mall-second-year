@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Prévoir la fréquentation</title>
+    <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+    
+</head>
+<body style="padding-top: 4.5rem;">
+
+<div th:insert="navigation.html"> </div>
+
+<main role="main" class="container">
+
+    <div class="card bg-light mt-5 mb-3" >
+        <div class="card-header">Prévoir la fréquentation</div>
+        <div class="card-body">
+        <table>
+        	<tr th:each ="Store : ${stores}">
+        		<td th:utext="${Store.name}">...</td>
+       		</tr>
+       	</table>
+        </div>
+    </div>
+    
+    <canvas id="line-chart" width="600" height="300"></canvas>
+    <canvas id="line-chart-regression" width="600" height="300"></canvas>
+    
+    <script th:inline="javascript">
+    // PREMIERE COURBE (JUSTE LES DONNEES)
+    
+    	Chart.scaleService.updateScaleDefaults('linear', {
+    		ticks: {
+       			 min: 0
+    			}
+			});
+    
+   		var frequentation = [[${Frequentation}]];
+   		
+   		var annee = [];
+   		for (var i = 0; i < frequentation.length; i++) {
+   		  annee.push(frequentation[i][0]);
+   		}
+   		
+   		
+   		var data = [];
+   		for (var i = 0; i < frequentation.length; i++) {
+   		  data.push(frequentation[i][1]);
+   		}
+   		
+		  new Chart(document.getElementById("line-chart"), {
+		  type: 'line',
+		  data: {
+		    labels: annee,
+		    datasets: [{ 
+		        data: data,
+		        label: "Fréquentation",
+		        borderColor: "#3e95cd",
+		        fill: false
+		      }]
+		  },
+		  options: {
+		    title: {
+		      display: true,
+		      text: 'Fréquentation du magasin'
+		    }
+		  }
+		});
+		  
+		  
+		  
+		  // DEUXIEME COURBE (Données lissées + prévision)
+		  var coeffRegression = [[${coeffRegression}]];
+		  var newData = [];
+		  annee.push(annee.length);
+		  annee.push(annee.length);
+		  annee.push(annee.length);
+		  var ordonneeOrigine = [[${moyenne}]];
+		  for (var i = 0; i < frequentation.length; i++) {
+	   		  newData.push(((i)*coeffRegression)+ordonneeOrigine);
+	   		}
+		  console.log(newData);
+		  var futurData = [];
+		  for (var i = 0; i < newData.length; i++) {
+	   		  futurData.push(newData[i]);
+	   		}
+		  
+		  futurData.push((frequentation.length*coeffRegression)+ordonneeOrigine);
+		  futurData.push(((frequentation.length+1)*coeffRegression)+ordonneeOrigine);
+		  futurData.push(((frequentation.length+2)*coeffRegression)+ordonneeOrigine);
+		  console.log(futurData);
+		  
+		  new Chart(document.getElementById("line-chart-regression"), {
+			  type: 'line',
+			  data: {
+			    labels: annee,
+			    datasets: [{ 
+			        data: newData,
+			        label: "Fréquentation historique",
+			        borderColor: "#3e95cd",
+			        fill: false
+			      }, 
+			      { 
+				    data: futurData,
+				    label: "Prévision de la fréquentation",
+				    borderColor: "#DC143C",
+				    fill: false
+				      }
+			      ]
+			  },
+			  options: {
+			    title: {
+			      display: true,
+			      text: 'Fréquentation du magasin'
+			    }
+			  }
+			});
+		  
+		  
+		  
+		  
+		</script>
+		
+</main>
+
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Modes Livraisons</title>
+    <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body style="padding-top: 4.5rem;">
+
+<div th:insert="navigation.html"> </div>
+
+<main role="main" class="container">
+
+    <div class="card bg-light mt-5 mb-3" >
+        <div class="card-header">Liste des modes de livraison</div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Libelle</th>
+                    <th scope="col">Durée minimum de livraison</th>
+                    <th scope="col">Durée maximum de livraison</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each ="modeLivraison : ${modeLivraison}">
+                    <td th:utext="${modeLivraison.libelle}">...</td>
+                    <td th:utext="${modeLivraison.dureeMinlivraison}">...</td>
+                    <td th:utext="${modeLivraison.dureeMaxlivraison}">...</td>
+<!--                     <td>supprimer</td> -->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</main>
+
+
+</body>
+
+</html>

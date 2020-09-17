@@ -1,0 +1,117 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" xmlns:th="http://www.w3.org/1999/xhtml">
+    <a class="navbar-brand" href="/">QuinteFlush</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Produits
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/products">Liste des produits</a>
+                    <a th:if="${#httpServletRequest.session.getAttribute('type')=='admin'}" class="dropdown-item" href="/products/add">Ajouter</a>
+                    <a class="dropdown-item" href="/products/search">Rechercher des produits</a>
+                </div>
+
+            </li>
+            <li th:if="${#httpServletRequest.session.getAttribute('type')=='admin'}"  class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Magasin
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/addStorePage">Ajouter</a>
+                    <a class="dropdown-item" href="/searchStorePage">Recherche boutique</a>
+                 </div>
+				
+				
+            </li>
+             <li th:if="${#httpServletRequest.session.getAttribute('type')=='admin'}"  class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Livraison
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    <a class="dropdown-item" href="/ModeLivraisonList">Liste des modes de livraison</a>
+                     <a class="dropdown-item" href="/TarificationLivraisonList">Liste des tarifications de livraison</a>
+                     <a class="dropdown-item" href="/addModeLivraison">Ajouter Mode de Livraison</a>
+                     <a class="dropdown-item" href="/addTarificationLivraison">Ajouter Tarification de livraison</a>
+                     <a class="dropdown-item" href="/formulaireSearchLivraison">Rechercher Livraison</a>
+                </div>
+
+            </li>
+            
+			<li th:if="${#httpServletRequest.session.getAttribute('type')=='admin'}" class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Compte
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                    <a class="dropdown-item" href="/customers">Liste des comptes</a>
+					<a class="dropdown-item" href="/customers/add">Ajouter</a>
+                    <a class="dropdown-item" href="/customers/search">Rechercher un client</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Parcours
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                    <a class="dropdown-item" href="/course">Mon Parcours</a>
+                </div>
+            </li>
+
+            <li th:if="${#httpServletRequest.session.getAttribute('type')=='admin'}"  class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Lancer une campagne
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown5">
+                	<a class="dropdown-item" href="/CampagneList">Liste des campagnes</a>
+                    <a class="dropdown-item" href="/addCampagne">Lancer une campagne de suggestion classique</a>
+                    <a class="dropdown-item" href="/addEvenement">Lancer une campagne de suggestion personnalisee</a>
+
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mes Notifications
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown6">
+                	<a class="dropdown-item" href="/MesNotifs">Afficher les Promos qui me concernent</a>
+                    <a class="dropdown-item" href="/MesSuggestion">Mes Suggestions</a>
+                </div>
+            </li>
+
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown7" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Frequentation
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown7">
+                    <a class="dropdown-item" href="/formulairePrevent">Prevoir la frequentation</a>
+                    <a class="dropdown-item" href="/formulaireAnalyse">Analyser la frequentation</a>
+                </div>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" th:if="${#httpServletRequest.session.getAttribute('id')!=null}">
+            <li class="nav-item dropdown" >
+                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown8" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Espace client
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown8">
+                    <a class="dropdown-item" href="/shoppingCart">Panier</a>
+                    <a class="dropdown-item" href="/commands">Mes commandes</a>
+                    <a th:if="${#httpServletRequest.session.getAttribute('type')=='admin'}" class="dropdown-item" href="/commandsList">Liste des commandes</a>
+                    <a class="dropdown-item" href="/retirer">Retirer ma commande</a>
+                </div>
+            </li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a class="btn btn-primary" role="button" th:if="${#httpServletRequest.session.getAttribute('id')!=null}"  href="/destroy">Déconnexion</a></li>
+            <li><a class="btn btn-primary" role="button" th:if="${#httpServletRequest.session.getAttribute('id')==null}" href="/login">Connexion</a>
+
+
+        </ul>
+    </div>
+</nav>

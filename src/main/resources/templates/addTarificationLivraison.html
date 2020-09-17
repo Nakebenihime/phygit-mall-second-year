@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Ajouter un Mode de livraison</title>
+    <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body style="padding-top: 4.5rem;">
+
+<div th:insert="navigation.html"> </div>
+
+<main role="main" class="container">
+
+    <div class="card bg-light mt-5 mb-3" >
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h1>Formulaire ajout mode livraison</h1>
+
+
+    	 <form th:object="${TarificationLivraison}" th:action="@{/addTarificationLivraison}"  method="post">
+			               <div class="form-group">
+			                    <label for="kmMax">Km maximum</label>
+			
+                        <input type="number" class="form-control" id="kmMax" th:field="*{kmMax}">
+			                </div>
+			                <div class="form-group">
+			                    <label for="kmMin">Km minimum</label>
+			                    <input th:field="*{kmMax}" class="form-control" type="number" id="kmMax" placeholder="Enter km Min de livraison">
+			                </div>
+			                <div class="form-group">
+			                    <label for="poidsMax">Poids maximum de livraison</label>
+			                    <input th:field="*{poidsMax}" class="form-control" type="number" id="poidsMax" placeholder="Enter poids maximum de livraison">
+			                </div>
+			               			                <div class="form-group">
+			                    <label for="poidsMin">Poids minimum de livraison</label>
+			                    <input th:field="*{poidsMin}" class="form-control" type="number" id="poidsMin" placeholder="Enter poids minimum de livraison">
+			                </div>
+			                			                <div class="form-group">
+			                    <label for="prix">Prix de livraison</label>
+			                    <input th:field="*{prix}" class="form-control" type="number" step = "0.01" id="prix" placeholder="Enter prix de livraison">
+			                </div>
+			                
+			               <div class="form-group">
+                   				 <label for="modeLivraison">Mode Livraison associé</label>
+                  			  	 <select th:field="*{modelivraison}"  class="form-control" id="modelivraison" name="testOrder">
+                     			 <option value="">Selectionner un mode de livraison</option>
+                       			 <option th:each="ml : ${modeLivraisons}"
+                      		          th:value="${ml.idModeLivraison}"
+                              		  th:text="'Mode Livraison n°'+${ml.idModeLivraison}+' - libelle :'+${ml.libelle}"></option>
+                    </select>
+                </div>
+			               
+			        <button type="submit" class="btn btn-primary">Submit</button>
+			  </form>
+    
+		
+
+
+
+        </div>
+    </div>
+
+
+</main>
+
+
+</body>
+
+</html>

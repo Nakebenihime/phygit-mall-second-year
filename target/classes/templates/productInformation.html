@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Référentiel Produit</title>
+    <link href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $( "#action-dispo" ).click(function() {
+                $("#disponibilite").toggle();
+            });
+        });
+    </script>
+</head>
+<body style="padding-top: 4.5rem;">
+
+<div th:insert="navigation.html"> </div>
+
+<main role="main" class="container">
+
+    <div class="card bg-light mt-5 mb-3" >
+        <div class="card-body">
+        <h2 style="margin: auto" th:utext="${products.get(0).name}"></h2>
+            <div>
+                <h3>Description</h3>
+                <p th:utext="${products.get(0).description}"></p>
+            </div>
+            <div>
+                <h3>Caractéristiques du produit</h3>
+                <table>
+                    <tr>
+                        <td>Marque</td>
+                        <td th:utext="${products.get(0).brand}"></td>
+                    </tr>
+                    <tr>
+                        <td>Hauteur</td>
+                        <td th:utext="${products.get(0).sizeHeight}+'cm'"></td>
+                    </tr>
+                    <tr>
+                        <td>Largeur</td>
+                        <td th:utext="${products.get(0).sizeWidth}+'cm'"></td>
+                    </tr>
+                    <tr>
+                        <td>Profondeur</td>
+                        <td th:utext="${products.get(0).sizeLength}+'cm'"></td>
+                    </tr>
+                    <tr>
+                        <td>Poid</td>
+                        <td th:utext="${products.get(0).weight}"></td>
+                    </tr>
+                    <tr>
+                        <td>Type</td>
+                        <td th:utext="${products.get(0).type}"></td>
+                    </tr>
+                </table>
+            </div><br />
+            <button class="btn btn-primary" type="button" id="action-dispo">Disponibilité et prix par magasin</button>
+
+            <div id="disponibilite" style="display: none">
+                <table class="table">
+                    <tr th:each="product : ${products}">
+                        <th class="text-center" th:utext="'Prix en Magasin :'+${product.price.refPrice}+'€ - Magasin:'+${product.stockProduct.get(0).store.name}+'- Disponibilité :'+${product.stockProduct.get(0).qte}"></th>
+                        <th>
+                            <a class="btn btn-primary" role="button" th:href="'/addCart/'+${product.productId}">Ajouter ce produit au panier</a>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    </div>
+
+
+</main>
+
+
+</body>
+
+</html>

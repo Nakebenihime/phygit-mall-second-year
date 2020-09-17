@@ -1,0 +1,11 @@
+pds\qflush\apiqflush\service\DeliveryHistoryServiceImplTest.class
+pds\qflush\apiqflush\service\ProductServiceImplTest.class
+pds\qflush\apiqflush\service\ModeLivraisonServiceImplTest.class
+pds\qflush\apiqflush\service\CampagneServiceImplTest.class
+pds\qflush\apiqflush\service\FrequentationServiceImplTest.class
+pds\qflush\apiqflush\service\SearchProductServiceTest.class
+pds\qflush\apiqflush\service\TarificationServiceImplTest.class
+pds\qflush\apiqflush\ApiQflushApplicationTests.class
+pds\qflush\apiqflush\service\AssociationServiceImplTest.class
+pds\qflush\apiqflush\service\CustomerServiceImplTest.class
+pds\qflush\apiqflush\service\StoreServiceTest.class
